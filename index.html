@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Sentiment Analysis UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            width: calc(100% - 100px);
+            padding: 10px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; /* Makes sure padding does not affect total width */
+        }
+        button {
+            width: 90px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .sentences {
+            margin-bottom: 20px;
+        }
+        .sentence {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-left: 5px solid #ccc;
+        }
+        .positive {
+            border-left-color: #4CAF50;
+        }
+        .negative {
+            border-left-color: #F44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Submit a sentence for Sentiment Analysis</h2>
+        <input type="text" id="sentenceInput" placeholder="Enter your sentence here...">
+        <button onclick="submitSentence()">Submit</button>
+        <div id="sentences" class="sentences">
+            <!-- Submitted sentences will appear here -->
+        </div>
+    </div>
+    <script>
+        function submitSentence() {
+            var input = document.getElementById('sentenceInput');
+            var text = input.value.trim();
+            if (text) {
+                // Placeholder for actual sentiment analysis result
+                // For demonstration, let's alternate sentiment for each submission
+                var sentimentClass = document.querySelectorAll('.sentence').length % 2 === 0 ? 'positive' : 'negative';
+                var sentiment = sentimentClass === 'positive' ? 'Positive' : 'Negative';
+
+                var sentenceDiv = document.getElementById('sentences');
+                var newSentence = document.createElement('div');
+                newSentence.classList.add('sentence', sentimentClass);
+                newSentence.textContent = `${text} - Sentiment: ${sentiment}`;
+                sentenceDiv.appendChild(newSentence);
+
+                input.value = ''; // Clear input field
+            }
+        }
+    </script>
+</body>
+</html>
